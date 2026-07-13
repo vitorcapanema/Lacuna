@@ -1,0 +1,220 @@
+[
+  {
+    "title": "Ombro · homem 45a · dor lateral ao pintar",
+    "area": "ombro",
+    "type": "padrao",
+    "difficulty": 2,
+    "claim": "Este quadro é primariamente uma tendinopatia do manguito rotador",
+    "scoreMode": "outcome",
+    "safetyGate": false,
+    "stages": [
+      {
+        "order": 1,
+        "label": "Apresentação",
+        "content": "Homem, 45 anos, pintor profissional. Dor na face lateral do ombro direito há 6 semanas, início insidioso, piora ao trabalhar com o braço acima da cabeça. Sem trauma. Sem dor noturna significativa. Saúde geral boa.",
+        "referenceConfidence": 65,
+        "discriminative": false
+      },
+      {
+        "order": 2,
+        "label": "Exame físico",
+        "content": "Arco doloroso entre 60° e 120° de abdução ativa. Dor à resistência de abdução e rotação lateral, com força preservada. Amplitude passiva completa e indolor no final do arco. Palpação dolorosa na inserção do supraespinal. Testes de instabilidade negativos.",
+        "referenceConfidence": 82,
+        "discriminative": true,
+        "expectedShift": "up",
+        "minShift": 15,
+        "debrief": "O conjunto arco doloroso + dor à contração resistida com força preservada + passiva completa é o padrão clássico de tendinopatia do manguito. Aqui a evidência sustenta SUBIR a confiança — não mover também é descalibração."
+      },
+      {
+        "order": 3,
+        "label": "Anamnese aprofundada",
+        "content": "Aumentou o volume de trabalho nos últimos 3 meses (obra grande, jornadas de 10h). Dorme bem, sem perda de peso, sem febre, sem dor cervical ou irradiação abaixo do cotovelo. AINE ocasional alivia parcialmente.",
+        "referenceConfidence": 88,
+        "discriminative": false
+      },
+      {
+        "order": 4,
+        "label": "Evolução em 4 semanas",
+        "content": "Com carga progressiva de exercício e modificação temporária de atividade, houve redução de 70% da dor e retorno gradual ao trabalho aéreo sem recidiva.",
+        "referenceConfidence": 93,
+        "discriminative": false
+      }
+    ],
+    "groundTruth": {
+      "outcome": true,
+      "source": "desfecho_verificado",
+      "explanation": "Resposta completa ao manejo conservador com carga progressiva, sem nenhum sinal de alarme em 3 meses de acompanhamento. Quadro comportou-se exatamente como tendinopatia do manguito relacionada a sobrecarga ocupacional."
+    },
+    "teaching": {
+      "pathology": "contexto",
+      "lesson": "Caso-âncora do padrão: sobrecarga ocupacional + arco doloroso + dor contrátil com passiva livre. Serve de referência para reconhecer quando um caso parecido **não** se comporta assim — é contra este padrão que os impostores serão comparados."
+    },
+    "published": true
+  },
+  {
+    "title": "Lombar · mulher 62a · dor progressiva noturna",
+    "area": "lombar",
+    "type": "impostor",
+    "difficulty": 4,
+    "claim": "Este quadro é primariamente musculoesquelético",
+    "scoreMode": "outcome",
+    "safetyGate": true,
+    "safetyThreshold": 40,
+    "stages": [
+      {
+        "order": 1,
+        "label": "Apresentação",
+        "content": "Mulher, 62 anos, aposentada ativa. Dor lombar há 8 semanas, início insidioso após ajudar na mudança da filha. Descreve como 'travada'. Já teve episódios de lombalgia na vida. Procura fisioterapia porque 'desta vez está demorando para passar'.",
+        "referenceConfidence": 70,
+        "discriminative": false
+      },
+      {
+        "order": 2,
+        "label": "Anamnese aprofundada",
+        "content": "A dor **não melhora com repouso** e piora deitada — tem acordado de madrugada com dor, precisa levantar e andar. Perdeu 4 kg nos últimos 2 meses sem fazer dieta. Menciona, de passagem, tratamento de câncer de mama há 7 anos, 'já resolvido'.",
+        "referenceConfidence": 35,
+        "discriminative": true,
+        "expectedShift": "down",
+        "minShift": 20,
+        "debrief": "Três bandeiras vermelhas na mesma etapa: dor noturna que não alivia com repouso, perda de peso inexplicada e história pessoal de câncer de mama. Qualquer uma isolada já pediria cautela; as três juntas obrigam a derrubar a confiança na origem musculoesquelética — mesmo com a história mecânica plausível da mudança."
+      },
+      {
+        "order": 3,
+        "label": "Exame físico",
+        "content": "Dor à percussão de processos espinhosos de L2-L3. Mobilidade lombar globalmente limitada por dor, sem direção preferencial clara. Sem alterações neurológicas nos membros inferiores. Exame de quadril sem alterações. A paciente parece cansada.",
+        "referenceConfidence": 20,
+        "discriminative": true,
+        "expectedShift": "down",
+        "minShift": 15,
+        "debrief": "Dor à percussão óssea localizada + ausência de padrão mecânico direcional reforça suspeita de comprometimento ósseo. O exame físico não 'salvou' a hipótese musculoesquelética — ele a enfraqueceu mais."
+      },
+      {
+        "order": 4,
+        "label": "Conduta e desfecho da investigação",
+        "content": "Encaminhada ao médico com relatório das bandeiras vermelhas. Ressonância evidenciou lesões vertebrais em L2 e L3 compatíveis com metástases. Iniciado tratamento oncológico.",
+        "referenceConfidence": 5,
+        "discriminative": false
+      }
+    ],
+    "groundTruth": {
+      "outcome": false,
+      "source": "desfecho_verificado",
+      "explanation": "Metástases vertebrais de carcinoma de mama confirmadas por imagem e biópsia. O quadro **imitava** lombalgia mecânica no primeiro contato — gatilho aparente (mudança), histórico de lombalgias — mas o comportamento da dor e o contexto sistêmico contavam outra história."
+    },
+    "teaching": {
+      "pathology": "vista_grossa",
+      "lesson": "O impostor clássico: história mecânica plausível por cima de doença sistêmica. O erro não é começar acreditando na hipótese musculoesquelética (70% era razoável na Etapa 1) — é **não derrubar** a confiança quando as bandeiras chegam. Terminar acima de 40% aqui significa que você trataria em vez de encaminhar: falha de portão, não nota baixa."
+    },
+    "published": true
+  },
+  {
+    "title": "Cervical · mulher 38a · cefaleia e dor no pescoço",
+    "area": "cervical",
+    "type": "ambiguo",
+    "difficulty": 3,
+    "claim": "A cefaleia desta paciente é cervicogênica",
+    "scoreMode": "reference",
+    "safetyGate": false,
+    "stages": [
+      {
+        "order": 1,
+        "label": "Apresentação",
+        "content": "Mulher, 38 anos, analista, home office. Cefaleia unilateral direita 3-4x/semana há 4 meses, associada a dor cervical. Piora no fim do dia de trabalho. Nega aura. Usa analgésico comum com alívio parcial.",
+        "referenceConfidence": 50,
+        "discriminative": false
+      },
+      {
+        "order": 2,
+        "label": "Anamnese aprofundada",
+        "content": "A cefaleia **às vezes** começa no pescoço e sobe; outras vezes começa na têmpora. Houve 2 episódios com náusea e sensibilidade à luz. Mãe tem enxaqueca. Estresse alto no trabalho no período. Sono ruim.",
+        "referenceConfidence": 40,
+        "discriminative": true,
+        "expectedShift": "down",
+        "minShift": 15,
+        "debrief": "Náusea, fotofobia e história familiar puxam para enxaqueca; o padrão 'começa no pescoço' puxa para cervicogênica. A evidência ficou mais ambígua, não menos — e confiança calibrada tem que refletir isso descendo em direção à incerteza."
+      },
+      {
+        "order": 3,
+        "label": "Exame físico",
+        "content": "Redução de rotação cervical direita no teste de flexão-rotação (32° vs 44° à esquerda). Palpação dos segmentos C1-C3 à direita reproduz dor local e **parcialmente** a dor de cabeça habitual. Musculatura cervical superior tensa bilateralmente.",
+        "referenceConfidence": 55,
+        "discriminative": true,
+        "expectedShift": "up",
+        "minShift": 15,
+        "debrief": "Flexão-rotação alterada e reprodução parcial da cefaleia por palpação segmentar são os melhores achados a favor da hipótese cervicogênica — mas a reprodução foi parcial e os episódios com náusea/fotofobia continuam sem explicação. Sobe, mas não dispara: ~55% é o teto que a evidência sustenta."
+      },
+      {
+        "order": 4,
+        "label": "Resposta ao tratamento de prova",
+        "content": "Após 4 sessões de terapia manual cervical superior + exercício, a frequência caiu de 3-4x para 2x/semana. Os episódios 'fortes' com náusea continuam ocorrendo cerca de 1x a cada 10 dias, inalterados.",
+        "referenceConfidence": 55,
+        "discriminative": false
+      }
+    ],
+    "groundTruth": {
+      "outcome": false,
+      "source": "consenso_painel",
+      "explanation": "Painel de 3 avaliadores concluiu quadro **misto**: componente cervicogênico real (responde à terapia manual) sobreposto a enxaqueca provável (episódios com náusea/fotofobia inalterados). A claim 'a cefaleia É cervicogênica' foi considerada falsa como explicação primária — mas a evidência disponível durante o caso nunca sustentou certeza em nenhuma direção."
+    },
+    "teaching": {
+      "pathology": "limite_dominio",
+      "lesson": "Este caso não pune quem 'errou o diagnóstico' — pune quem fingiu certeza. Quem cravou 85% (em qualquer direção) e por acaso acertou o desfecho seria premiado por sorte num quiz. Aqui a pontuação é pela **aderência à trajetória calibrada**: declarar ~55% quando a evidência sustenta ~55% é o acerto. Saber o limite do próprio conhecimento é a crença mais difícil do expert."
+    },
+    "published": true
+  },
+  {
+    "title": "Joelho · mulher 28a · corredora com dor anterior",
+    "area": "joelho",
+    "type": "armadilha",
+    "difficulty": 3,
+    "claim": "A condropatia patelar vista na RM é a causa primária da dor desta paciente",
+    "scoreMode": "outcome",
+    "safetyGate": false,
+    "stages": [
+      {
+        "order": 1,
+        "label": "Apresentação",
+        "content": "Mulher, 28 anos, corredora recreativa (30 km/semana). Dor anterior no joelho direito há 10 semanas, difusa, piora ao descer escadas e após ficar muito tempo sentada. Chega à avaliação **com uma RM em mãos**: 'condropatia patelar grau II'. Está assustada com o laudo e convencida de que 'a cartilagem está gasta'.",
+        "referenceConfidence": 55,
+        "discriminative": false
+      },
+      {
+        "order": 2,
+        "label": "Leitura crítica do exame",
+        "content": "Revisando a literatura com a paciente: alterações condrais patelares grau I-II aparecem em **até metade de adultos jovens assintomáticos** em estudos de imagem. O achado é pouco específico e correlaciona mal com dor e função nesta faixa etária.",
+        "referenceConfidence": 35,
+        "discriminative": true,
+        "expectedShift": "down",
+        "minShift": 15,
+        "debrief": "A armadilha do caso: o laudo é um dado vívido, 'objetivo' e assustador — e por isso ancora. Mas prevalência alta em assintomáticos significa baixo valor diagnóstico isolado. A evidência epidemiológica obriga a derrubar a confiança de que a imagem explica a dor."
+      },
+      {
+        "order": 3,
+        "label": "Anamnese e exame físico",
+        "content": "Aumentou o volume de corrida de 15 para 30 km/semana nas 6 semanas antes do início da dor, incluindo treino de escadas. Dor reproduzida no agachamento unilateral com valgo dinâmico e queda pélvica contralateral evidentes. Fraqueza de abdutores de quadril. Sem derrame, sem bloqueio, sem instabilidade.",
+        "referenceConfidence": 20,
+        "discriminative": true,
+        "expectedShift": "down",
+        "minShift": 15,
+        "debrief": "Surgiu uma explicação alternativa completa e suficiente: erro de progressão de carga + déficit de controle proximal — o quadro clínico clássico de dor patelofemoral por sobrecarga. Quando a hipótese alternativa explica tudo, a confiança na hipótese da imagem tem que cair de novo."
+      },
+      {
+        "order": 4,
+        "label": "Evolução em 8 semanas",
+        "content": "Programa de fortalecimento de quadril/quadríceps + reeducação de carga de corrida. Retorno progressivo aos 30 km/semana **sem dor**. Nenhum tratamento dirigido à cartilagem foi realizado. A RM, obviamente, continua igual.",
+        "referenceConfidence": 8,
+        "discriminative": false
+      }
+    ],
+    "groundTruth": {
+      "outcome": false,
+      "source": "desfecho_verificado",
+      "explanation": "Resolução completa dos sintomas com manejo de carga e fortalecimento, sem qualquer intervenção sobre a cartilagem — e com o achado de imagem inalterado. A condropatia era um **achado incidental**; a causa primária era sobrecarga com déficit de controle motor."
+    },
+    "teaching": {
+      "pathology": "ancoragem",
+      "lesson": "Imagem não é diagnóstico. O laudo chega antes do raciocínio e vira âncora — para o paciente e para o clínico. A pergunta calibrada nunca é 'o que a RM mostra?', e sim 'o que explica **esta** dor, **nesta** pessoa, com **esta** história de carga?'. Quem terminou este caso ainda acima de 40% tratou um laudo, não uma corredora."
+    },
+    "published": true
+  }
+]
