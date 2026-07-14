@@ -14,6 +14,9 @@ export default function Nav({ profile }: { profile: Profile }) {
           <Link href="/" className="text-zinc-600 hover:text-zinc-900">
             Casos
           </Link>
+          <Link href="/simulador" className="text-zinc-600 hover:text-zinc-900">
+            Simulador
+          </Link>
           <Link href="/painel" className="text-zinc-600 hover:text-zinc-900">
             Painel
           </Link>

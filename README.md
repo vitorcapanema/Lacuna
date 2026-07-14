@@ -1,6 +1,25 @@
-# Lacuna · Banco de Casos
+# Lacuna · Treino de raciocínio clínico
 
-Treinador de raciocínio clínico para fisioterapeutas neuromusculoesqueléticos — MVP (Fase 1) do Método Lacuna.
+Dois instrumentos complementares para fisioterapeutas neuromusculoesqueléticos:
+
+1. **Simulador de casos com IA** (`/simulador`) — o caso é gerado na hora pelo Claude, que faz o papel de paciente e de mentor. O profissional externaliza o raciocínio ANTES de receber qualquer resposta: hipóteses com confiança declarada, anamnese com justificativa obrigatória por pergunta, exame com interpretação antecipada, conduta e debrief com notas por dimensão. **Para testar, só precisa de `ANTHROPIC_API_KEY` — não requer Supabase.**
+2. **Banco de Casos** (Método Lacuna, Fase 1) — casos curados em etapas com commit de confiança travado, pontuação por Brier/ancoragem/portão de segurança. Requer Supabase.
+
+## Simulador — teste em 2 minutos
+
+```bash
+npm install
+echo "ANTHROPIC_API_KEY=sk-ant-sua-chave" > .env.local
+npm run dev        # abra http://localhost:3000/simulador
+```
+
+A chave fica só no servidor (rota `/api/claude`); o navegador nunca fala direto com a API da Anthropic. O modelo é configurável via `ANTHROPIC_MODEL` (default `claude-sonnet-4-6`).
+
+> Atenção: a rota `/simulador` é pública de propósito (para facilitar o teste). Antes de um deploy aberto na internet, proteja-a com login ou aceite o custo de uso anônimo da sua chave.
+
+---
+
+# Banco de Casos (Método Lacuna)
 
 O usuário recebe um caso clínico **em etapas**. A cada etapa declara sua confiança (0–100%) numa proposição do caso e **trava** antes de ver a etapa seguinte. No fim, vê o desfecho verificado e sua trajetória de confiança contra a trajetória calibrada. **O que se mede não é o acerto final — é o comportamento de revisão.**
 

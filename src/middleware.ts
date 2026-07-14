@@ -3,7 +3,16 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 const PUBLIC_PATHS = ['/login', '/auth'];
 
+// O simulador (e sua rota de API) não exige login nem Supabase — dá para
+// testar só com ANTHROPIC_API_KEY. Saímos antes de tocar no Supabase para
+// que ele funcione mesmo sem o projeto configurado.
+const STANDALONE_PATHS = ['/simulador', '/api/claude'];
+
 export async function middleware(request: NextRequest) {
+  if (STANDALONE_PATHS.some((p) => request.nextUrl.pathname.startsWith(p))) {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
