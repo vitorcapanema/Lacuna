@@ -13,6 +13,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next({ request });
   }
 
+  // Sem Supabase configurado (deploy só do simulador), todo o resto do app
+  // redireciona para o simulador em vez de quebrar.
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/simulador';
+    url.search = '';
+    return NextResponse.redirect(url);
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
