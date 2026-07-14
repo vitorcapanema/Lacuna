@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { BANCO_CASOS, CasoBanco, CasoSimulador } from '@/lib/banco-simulador';
 
 // ============================================================
 // SIMULADOR DE RACIOCÍNIO CLÍNICO — ONE Health & Performance
@@ -20,23 +21,9 @@ interface Dificuldade {
   desc: string;
 }
 
-interface Caso {
-  titulo: string;
-  paciente: { nome: string; idade: number; perfil: string };
-  vinheta: string;
-  dados_ocultos: {
-    anamnese: { tema: string; info: string }[];
-    exame_fisico: { teste: string; achado: string }[];
-    complementares?: { exame: string; resultado: string }[];
-  };
-  gabarito: {
-    diagnostico_provavel: string;
-    diferenciais: string[];
-    red_flags: string;
-    perguntas_de_ouro: string[];
-    pegadinha: string;
-  };
-}
+// Mesmo formato tanto para caso gerado pela IA quanto para caso do banco
+// (real, adaptado): os prompts de anamnese/exame/mentor não distinguem a origem.
+type Caso = CasoSimulador;
 
 interface Entrada {
   pergunta: string;
@@ -240,6 +227,24 @@ export default function SimuladorRaciocinio() {
     return `HIPÓTESES INICIAIS: ${hipoteses.texto} || ANAMNESE: ${a || 'nenhuma pergunta'} || EXAME: ${x || 'nenhum teste'} || CONDUTA: ${conduta.texto}`.slice(0, 4000);
   }
 
+  function resetarEstagios() {
+    setEstagio(0);
+    setHipoteses({ texto: '', confianca: 6, feedback: null, vies: null, enviado: false });
+    setAnamnese({ pergunta: '', justificativa: '', entradas: [] });
+    setExame({ pergunta: '', justificativa: '', entradas: [] });
+    setConduta({ texto: '', confianca: 6, feedback: null, expert: null, enviado: false });
+    setDebrief(null);
+  }
+
+  // Caso do banco: começa na hora, sem chamada de geração — a IA entra
+  // apenas para interpretar os dados ocultos e comentar como mentor.
+  function iniciarCasoBanco(c: CasoBanco) {
+    setErro(null);
+    setCaso(c);
+    resetarEstagios();
+    setTela('caso');
+  }
+
   async function gerarCaso() {
     if (!dominio) return;
     setLoading(true);
@@ -401,7 +406,25 @@ export default function SimuladorRaciocinio() {
             processo, não só a resposta final.
           </p>
 
-          <div className="rotulo">Domínio</div>
+          <div className="rotulo">Casos do banco — reais, adaptados</div>
+          <div className="grade-dominios">
+            {BANCO_CASOS.map((c) => (
+              <button key={c.id} className="card-dominio" onClick={() => iniciarCasoBanco(c)}>
+                <span className="card-nome">{c.titulo}</span>
+                <span className="card-desc">
+                  {c.area} ·{' '}
+                  {c.dificuldade === 'iniciante'
+                    ? 'Iniciante'
+                    : c.dificuldade === 'intermediario'
+                      ? 'Intermediário'
+                      : 'Avançado'}
+                </span>
+                <span className="card-fonte">{c.fonte}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="rotulo">Ou gere um caso novo com IA — domínio</div>
           <div className="grade-dominios">
             {DOMINIOS.map((d) => (
               <button
@@ -768,6 +791,7 @@ const CSS = `
 .card-dominio.ativo{border-color:var(--petrol); box-shadow:inset 0 0 0 1px var(--petrol);}
 .card-nome{font-weight:600; color:var(--petrol-ink);}
 .card-desc{font-size:13px; color:var(--muted);}
+.card-fonte{font-size:11px; color:#8A7B54; font-style:italic; margin-top:2px;}
 .grade-dif{display:flex; gap:8px; flex-wrap:wrap;}
 .pill{background:var(--card); border:1px solid var(--linha); border-radius:999px; padding:7px 16px; cursor:pointer; font-family:inherit; font-size:14px;}
 .pill.ativo{background:var(--petrol); color:#fff; border-color:var(--petrol);}
